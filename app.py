@@ -2,8 +2,9 @@ from flask import Flask, request, render_template, jsonify
 from crewai import Crew
 from tasks import Tasks
 from agents import Agents
+import markdown
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__, static_folder='static', template_folder='templates')
 
 tasks = Tasks()
 agents = Agents()
@@ -33,8 +34,12 @@ def submit():
     )
 
     result = crew.kickoff()
+    markdown_result = result['result']
+    html_result = markdown.markdown(markdown_result)
 
-    return jsonify(result=result)
+    return jsonify(result=html_result)
+    # return jsonify(result=result)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
+    

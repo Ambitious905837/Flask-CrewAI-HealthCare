@@ -1,11 +1,11 @@
-{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Healthcare AI News</title>
     <style>
         body {
-            background-image: url("{% static 'src/background.webp' %}");
+            background-image: url("{{ url_for('static', filename='src/background.webp') }}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
